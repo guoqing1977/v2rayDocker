@@ -46,7 +46,10 @@ RUN apk upgrade --update \
     && apk del curl \
     && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone \
-    && rm -rf /tmp/v2ray /var/cache/apk/*
+    && cd /tmp \
+    && git clone https://github.com/xifanu/3DCEList.git \
+    && mv /tmp/3DCEList/* /srv/ \
+    && rm -rf /tmp/* /var/cache/apk/*
 
 # ADD entrypoint.sh /entrypoint.sh
 WORKDIR /srv
@@ -81,14 +84,11 @@ VOLUME /root/.caddy /srv
 # WORKDIR /srv
 
 COPY Caddyfile /etc/Caddyfile
-COPY index.html /srv/index.html
+# COPY index.html /srv/index.html
 # COPY package.json /etc/package.json
 # install process wrapper
 COPY --from=builder /go/bin/parent /bin/parent
 ADD caddy.sh /caddy.sh
-RUN cd /tmp/ \
-    git clone https://github.com/xifanu/3DCEList.git \
-    mv 3DCEList/* /etc/
 EXPOSE 443 80
 ENTRYPOINT ["/caddy.sh"]
 # CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=$ACME_AGREE"]
