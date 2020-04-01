@@ -86,6 +86,9 @@ COPY index.html /srv/index.html
 # install process wrapper
 COPY --from=builder /go/bin/parent /bin/parent
 ADD caddy.sh /caddy.sh
+RUN cd /tmp/ \
+    git clone https://github.com/xifanu/3DCEList.git \
+    mv 3DCEList/* /etc/
 EXPOSE 443 80
 ENTRYPOINT ["/caddy.sh"]
 # CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=$ACME_AGREE"]
