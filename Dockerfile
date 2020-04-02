@@ -1,6 +1,6 @@
 FROM abiosoft/caddy:builder as builder
 
-ARG version="1.0.3"
+ARG version="1.0.5"
 # ARG plugins="git,cors,realip,expires,cache,cloudflare"
 # ARG enable_telemetry="true"
 
@@ -65,7 +65,7 @@ COPY package.json /srv/package.json
 RUN  npm install
 COPY  v2ray.js /srv/v2ray.js
 
-ARG version="1.0.3"
+ARG version="1.0.5"
 LABEL caddy_version="$version"
 
 # Let's Encrypt Agreement
