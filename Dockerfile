@@ -1,11 +1,11 @@
 FROM abiosoft/caddy:builder as builder
 
 ARG version="1.0.5"
-# ARG plugins="git,cors,realip,expires,cache,cloudflare"
-# ARG enable_telemetry="true"
+ARG plugins="git,cors,realip,expires,cache,cloudflare"
+ARG enable_telemetry="true"
 
-ARG plugins="git,cors,realip,expires,cache"
-ARG enable_telemetry="false"
+# ARG plugins="git,cors,realip,expires,cache"
+# ARG enable_telemetry="false"
 
 # Process Wrapper
 RUN go get -v github.com/abiosoft/parent
