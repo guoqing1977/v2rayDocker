@@ -7,6 +7,9 @@ ARG enable_telemetry="true"
 # ARG plugins="git,cors,realip,expires,cache"
 # ARG enable_telemetry="false"
 
+ENV GO111MODULE=on
+ENV GOPROXY=https://goproxy.cn,direct
+# ENV GOPROXY=https://goproxy.io,direct
 # Process Wrapper
 RUN go get -v github.com/abiosoft/parent
 
